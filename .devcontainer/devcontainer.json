@@ -1,0 +1,56 @@
+{
+    "name": "Robo Pilot",
+    "build": {
+        "dockerfile": "../docker/Dockerfile",
+        "context": "..",
+        "args": {
+            "ROS_DISTRO": "jazzy"
+        }
+    },
+    // "features": {
+    //     "ghcr.io/devcontainers/features/common-utils:2": {
+    //         "username": "vscode",
+    //         "userUid": "automatic",
+    //         "userGid": "automatic"
+    //     },
+    //     "ghcr.io/devcontainers/features/git:1": {
+    //         "version": "latest",
+    //         "ppa": true
+    //     }
+    // },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cpptools-themes",
+                "ranch-hand-robotics.rde-pack",
+                "ranch-hand-robotics.rde-ros-2",
+                "ranch-hand-robotics.urdf-editor",
+                "redhat.vscode-yaml",
+                "streetsidesoftware.code-spell-checker",
+                "visualstudioexptteam.vscodeintellicode"
+            ],
+            "settings": {
+                "remote.autoForwardPorts": false,
+                "remote.restoreForwardedPorts": false
+            }
+        }
+    },
+    "runArgs": [
+        "-e", "DISPLAY=${env:DISPLAY}",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+        "--network=host",
+        "--gpus=all"
+    ],
+    "forwardPorts": [],
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "containerEnv": {
+        "ROS_DOMAIN_ID": "0",
+        "RMW_IMPLEMENTATION": "rmw_cyclonedds_cpp"
+    },
+    "remoteUser": "ubuntu",
+    "postStartCommand": "echo 'Devcontainer started!'"
+}
