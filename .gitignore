@@ -53,3 +53,4 @@ CATKIN_IGNORE
 install/
 build/
 log/
+src/robo_pilot_backend/db.sqlite3

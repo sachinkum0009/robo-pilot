@@ -1,12 +1,11 @@
 [project]
-name = "robo-pilot"
+name = "robo-pilot-backend"
 version = "0.1.0"
-description = "A robotic control and navigation system."
+description = "robo pilot backend service."
 authors = [{ name = "Sachin Kumar", email = "sachinkumar.ar97@gmail.com" }]
 license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
-
-[tool.uv.workspace]
-members = [ "src/*" ]
+dependencies = [
+    "django>=6.0",
+]
