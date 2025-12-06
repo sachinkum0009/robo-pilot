@@ -30,11 +30,12 @@
                 "ranch-hand-robotics.urdf-editor",
                 "redhat.vscode-yaml",
                 "streetsidesoftware.code-spell-checker",
-                "visualstudioexptteam.vscodeintellicode"
+                "visualstudioexptteam.vscodeintellicode",
+                "spencerwmiles.vscode-task-buttons"
             ],
             "settings": {
-                "remote.autoForwardPorts": false,
-                "remote.restoreForwardedPorts": false
+                "remote.autoForwardPorts": true,
+                "remote.restoreForwardedPorts": true
             }
         }
     },
@@ -49,8 +50,9 @@
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
     "containerEnv": {
         "ROS_DOMAIN_ID": "0",
-        "RMW_IMPLEMENTATION": "rmw_cyclonedds_cpp"
+        "RMW_IMPLEMENTATION": "rmw_cyclonedds_cpp",
+        "PYTHONPATH": "/workspace/.venv/lib/python3.12/site-packages:${containerEnv:PYTHONPATH}"
     },
     "remoteUser": "ubuntu",
-    "postStartCommand": "echo 'Devcontainer started!'"
+    "postStartCommand": "uv sync --locked"
 }

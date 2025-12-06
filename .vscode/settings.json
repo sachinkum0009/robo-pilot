@@ -1,0 +1,35 @@
+{
+    "files.exclude": {
+        "**/build": true,
+        "**/install": true,
+        "**/log": true,
+        "**/__pycache__": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/build": true,
+        "**/install": true,
+        "**/log": true,
+        "**/__pycache__": true
+    },
+    "VsCodeTaskButtons.showCounter": true,
+    "VsCodeTaskButtons.tasks": [
+        {
+            "label": "$(gear) Build",
+            "task": "Build Workspace",
+            "tooltip": "Build the workspace"
+        },
+        {
+            "label": "$(trash) Clean",
+            "task": "Clean Workspace",
+            "tooltip": "Clean the workspace"
+        },
+        {
+            "label": "$(server-process) Run Server",
+            "task": "Run Backend Server",
+            "tooltip": "Run the backend server"
+        }
+    ]
+}

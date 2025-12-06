@@ -2,12 +2,6 @@ version = 1
 revision = 3
 requires-python = ">=3.12"
 
-[manifest]
-members = [
-    "robo-pilot",
-    "robo-pilot-backend",
-]
-
 [[package]]
 name = "asgiref"
 version = "3.11.0"
@@ -35,11 +29,6 @@ wheels = [
 name = "robo-pilot"
 version = "0.1.0"
 source = { virtual = "." }
-
-[[package]]
-name = "robo-pilot-backend"
-version = "0.1.0"
-source = { virtual = "src/robo_pilot_backend" }
 dependencies = [
     { name = "django" },
 ]

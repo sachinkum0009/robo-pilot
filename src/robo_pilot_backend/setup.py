@@ -6,6 +6,8 @@ setup(
     name=package_name,
     version='0.0.0',
     packages=find_packages(exclude=['test']),
+    # Expose the top-level manage.py as a module so ROS2 can wrap it
+    py_modules=['manage'],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -24,6 +26,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'manage = manage:main',
         ],
     },
 )
