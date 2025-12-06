@@ -30,6 +30,11 @@
             "label": "$(server-process) Run Server",
             "task": "Run Backend Server",
             "tooltip": "Run the backend server"
+        },
+        {
+            "label": "$(browser) Run Frontend",
+            "task": "Run Frontend Server",
+            "tooltip": "Run the frontend server"
         }
     ]
 }

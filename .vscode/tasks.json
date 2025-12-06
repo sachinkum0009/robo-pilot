@@ -37,6 +37,16 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Run Frontend Server",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/run_frontend.sh",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "problemMatcher": []
         }
     ]
 }
