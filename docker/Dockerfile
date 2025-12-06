@@ -30,5 +30,13 @@ USER ubuntu
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+ENV NVM_DIR=/home/ubuntu/.nvm
+
+RUN mkdir -p "$NVM_DIR" && \
+    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh" | bash && \
+    bash -c ". $NVM_DIR/nvm.sh && nvm install --lts --latest-npm"
+
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/ubuntu/.bashrc
+
 # Set up entrypoint
 ENTRYPOINT ["/bin/bash", "-c", "exec bash"]

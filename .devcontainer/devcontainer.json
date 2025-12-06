@@ -31,7 +31,8 @@
                 "redhat.vscode-yaml",
                 "streetsidesoftware.code-spell-checker",
                 "visualstudioexptteam.vscodeintellicode",
-                "spencerwmiles.vscode-task-buttons"
+                "spencerwmiles.vscode-task-buttons",
+                "Postman.postman-for-vscode"
             ],
             "settings": {
                 "remote.autoForwardPorts": true,
