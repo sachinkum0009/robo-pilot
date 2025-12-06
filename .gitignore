@@ -54,3 +54,4 @@ install/
 build/
 log/
 src/robo_pilot_backend/db.sqlite3
+.vscode/browse.vc.db*
