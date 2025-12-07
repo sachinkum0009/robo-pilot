@@ -1,0 +1,611 @@
+.orchestration-manager-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding-bottom: 2rem;
+}
+
+.orchestration-header {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.orchestration-content {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* Workflows Grid */
+.workflows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 1.5rem;
+}
+
+.workflow-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+
+.workflow-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.workflow-card.selected {
+  border-color: #667eea;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+}
+
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.workflow-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1e293b;
+}
+
+.workflow-id {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+  background: #f1f5f9;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 0.3rem;
+}
+
+.status-badge {
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-running {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-scheduled {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-paused {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-failed {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+/* Progress Bar */
+.workflow-progress {
+  margin-bottom: 1.5rem;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.progress-percentage {
+  color: #667eea;
+  font-weight: 700;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.5s ease;
+  border-radius: 10px;
+}
+
+/* Workflow Details */
+.workflow-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.detail-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.detail-value {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.priority-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.priority-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.priority-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-low {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* Workflow Actions */
+.workflow-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.action-btn.pause {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.action-btn.pause:hover {
+  background: #fde68a;
+  transform: translateY(-2px);
+}
+
+.action-btn.stop {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.action-btn.stop:hover {
+  background: #fecaca;
+  transform: translateY(-2px);
+}
+
+.action-btn.resume,
+.action-btn.start {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.action-btn.resume:hover,
+.action-btn.start:hover {
+  background: #bbf7d0;
+  transform: translateY(-2px);
+}
+
+.action-btn.cancel {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.action-btn.cancel:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.action-btn.view {
+  background: #667eea;
+  color: white;
+  width: 100%;
+}
+
+.action-btn.view:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+}
+
+/* Task Queue */
+.task-queue-container {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.queue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.queue-header h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+}
+
+.add-task-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-task-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.2rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.task-item:hover {
+  background: #f1f5f9;
+  transform: translateX(5px);
+}
+
+.task-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.priority-indicator {
+  width: 4px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.priority-indicator.priority-high {
+  background: #ef4444;
+}
+
+.priority-indicator.priority-medium {
+  background: #f59e0b;
+}
+
+.priority-indicator.priority-low {
+  background: #3b82f6;
+}
+
+.task-info h4 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.task-id {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+  background: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
+.task-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.task-robot,
+.task-priority,
+.task-eta {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  background: white;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.task-priority.priority-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.task-priority.priority-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.task-priority.priority-low {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task-action-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: white;
+  color: #64748b;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.task-action-btn:hover {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.task-action-btn.edit:hover {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.task-action-btn.remove:hover {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Schedule */
+.schedule-container {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.schedule-header h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+}
+
+.add-schedule-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-schedule-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.schedule-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+.schedule-item:hover {
+  background: #f1f5f9;
+  transform: translateX(5px);
+}
+
+.schedule-time {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #667eea;
+  min-width: 80px;
+}
+
+.schedule-content {
+  flex: 1;
+}
+
+.schedule-content h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+.schedule-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.schedule-status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.schedule-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.schedule-action-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background: white;
+  color: #64748b;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.schedule-action-btn:hover {
+  background: #e2e8f0;
+  color: #334155;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .orchestration-header {
+    padding: 1rem;
+  }
+
+  .orchestration-content {
+    padding: 0 1rem;
+  }
+
+  .workflows-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-details {
+    grid-template-columns: 1fr;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-meta {
+    flex-wrap: wrap;
+  }
+
+  .schedule-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .schedule-time {
+    min-width: auto;
+  }
+}

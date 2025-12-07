@@ -363,16 +363,28 @@ function Dashboard() {
 
           {/* Stats Grid */}
           <div className="stats-grid">
+            <div className="stat-card" onClick={() => navigate('/chat')} style={{ cursor: 'pointer' }}>
+              <div className="stat-icon">💬</div>
+              <h4>Robot Chat</h4>
+              <p>Chat with your robot assistant</p>
+            </div>
+
+            <div className="stat-card" onClick={() => navigate('/fleet')} style={{ cursor: 'pointer' }}>
+              <div className="stat-icon">🚀</div>
+              <h4>Fleet Manager</h4>
+              <p>Monitor and manage your robot fleet</p>
+            </div>
+
+            <div className="stat-card" onClick={() => navigate('/orchestration')} style={{ cursor: 'pointer' }}>
+              <div className="stat-icon">⚙️</div>
+              <h4>Orchestration</h4>
+              <p>Coordinate workflows and tasks</p>
+            </div>
+
             <div className="stat-card">
               <div className="stat-icon">📊</div>
               <h4>Analytics</h4>
               <p>View your robot performance metrics</p>
-            </div>
-
-            <div className="stat-card">
-              <div className="stat-icon">⚙️</div>
-              <h4>Settings</h4>
-              <p>Configure your preferences</p>
             </div>
 
             <div className="stat-card">

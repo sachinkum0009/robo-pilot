@@ -4,6 +4,9 @@ import './App.css'
 import Login from './login.jsx'
 import Dashboard from './Dashboard.jsx'
 import Settings from './Settings.jsx'
+import RobotChat from './RobotChat.jsx'
+import FleetManager from './FleetManager.jsx'
+import OrchestrationManager from './OrchestrationManager.jsx'
 
 function App() {
   const [csrfToken, setCsrfToken] = useState('');
@@ -59,6 +62,30 @@ function App() {
           element={
             <ProtectedRoute>
               <Settings />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/chat" 
+          element={
+            <ProtectedRoute>
+              <RobotChat />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/fleet" 
+          element={
+            <ProtectedRoute>
+              <FleetManager />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/orchestration" 
+          element={
+            <ProtectedRoute>
+              <OrchestrationManager />
             </ProtectedRoute>
           } 
         />
