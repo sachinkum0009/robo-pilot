@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-virtualenv \
     git \
+    btop \
     wget \
     curl
 
@@ -19,7 +20,8 @@ RUN apt-get install -y \
     python3-rosdep \
     python3-vcstool \
     libasio-dev \
-    ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+    ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
+    ros-${ROS_DISTRO}-rosbridge-server
 
 # Create vscode user correctly
 RUN useradd -m ubuntu || true \
