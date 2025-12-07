@@ -211,6 +211,134 @@
   color: #721c24;
 }
 
+/* Map Viewer Section */
+.map-viewer-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.map-viewer-section h2 {
+  font-size: 20px;
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+.map-canvas {
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.map-canvas canvas {
+  display: block !important;
+  border-radius: 6px;
+  cursor: grab;
+  user-select: none;
+  margin: 0 !important;
+}
+
+.map-canvas canvas:active {
+  cursor: grabbing;
+}
+
+/* Hide any duplicate canvases */
+.map-canvas canvas ~ canvas {
+  display: none !important;
+}
+
+.map-info {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0 0 8px 0;
+  font-style: italic;
+}
+
+.map-controls-hint {
+  font-size: 13px;
+  color: #495057;
+  margin: 0;
+  padding: 12px;
+  background: #e9ecef;
+  border-radius: 6px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.map-controls-hint span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.map-controls-hint .control-icon {
+  font-weight: 600;
+  color: #667eea;
+}
+
+/* Topic Publisher Section */
+.topic-publisher-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.topic-publisher-section h2 {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.publisher-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.publisher-controls textarea {
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+.publisher-controls textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.publish-button {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
+}
+
+.publish-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+.publish-button:active {
+  transform: translateY(0);
+}
+
 /* Topic Subscriber Section */
 .topic-subscriber-section {
   background: #f8f9fa;
