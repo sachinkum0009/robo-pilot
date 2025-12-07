@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 function Dashboard() {
   const [username, setUsername] = useState('');
+  const [rosStatus, setRosStatus] = useState('Not Connected');
+  const [topicMessages, setTopicMessages] = useState([]);
+  const [topicName, setTopicName] = useState('/my_topic');
+  const [messageType, setMessageType] = useState('std_msgs/String');
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate();
+  const rosRef = useRef(null);
+  const topicListenerRef = useRef(null);
 
   useEffect(() => {
     // Check if user is authenticated
@@ -17,7 +24,104 @@ function Dashboard() {
     } else {
       setUsername(storedUsername);
     }
+
+    // Initialize ROS connection
+    initializeRosConnection();
+
+    // Cleanup on unmount
+    return () => {
+      if (topicListenerRef.current) {
+        topicListenerRef.current.unsubscribe();
+      }
+      if (rosRef.current) {
+        rosRef.current.close();
+      }
+    };
   }, [navigate]);
+
+  const initializeRosConnection = () => {
+    // Load roslib from CDN
+    if (!window.ROSLIB) {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/roslib@1/build/roslib.min.js';
+      script.onload = () => {
+        connectToRos();
+      };
+      document.body.appendChild(script);
+    } else {
+      connectToRos();
+    }
+  };
+
+  const connectToRos = () => {
+    try {
+      const ros = new window.ROSLIB.Ros({ url: 'ws://localhost:9090' });
+      rosRef.current = ros;
+
+      ros.on('connection', () => {
+        setRosStatus('Connected');
+      });
+
+      ros.on('error', (error) => {
+        setRosStatus(`Error: ${error}`);
+      });
+
+      ros.on('close', () => {
+        setRosStatus('Closed');
+        setIsSubscribed(false);
+      });
+    } catch (error) {
+      setRosStatus(`Failed to connect: ${error.message}`);
+    }
+  };
+
+  const handleSubscribe = () => {
+    if (!rosRef.current || rosStatus !== 'Connected') {
+      alert('Please wait for ROS connection to be established');
+      return;
+    }
+
+    // Unsubscribe from previous topic if exists
+    if (topicListenerRef.current) {
+      topicListenerRef.current.unsubscribe();
+    }
+
+    // Clear previous messages
+    setTopicMessages([]);
+
+    try {
+      const topic_listener = new window.ROSLIB.Topic({
+        ros: rosRef.current,
+        name: topicName,
+        messageType: messageType,
+      });
+
+      topic_listener.subscribe((message) => {
+        const timestamp = new Date().toLocaleTimeString();
+        setTopicMessages((prev) => [
+          ...prev,
+          { time: timestamp, data: JSON.stringify(message, null, 2) }
+        ]);
+      });
+
+      topicListenerRef.current = topic_listener;
+      setIsSubscribed(true);
+    } catch (error) {
+      alert(`Failed to subscribe: ${error.message}`);
+    }
+  };
+
+  const handleUnsubscribe = () => {
+    if (topicListenerRef.current) {
+      topicListenerRef.current.unsubscribe();
+      topicListenerRef.current = null;
+      setIsSubscribed(false);
+    }
+  };
+
+  const handleClearMessages = () => {
+    setTopicMessages([]);
+  };
 
   const getCsrfToken = () => {
     const name = 'csrftoken';
@@ -72,6 +176,75 @@ function Dashboard() {
         </div>
 
         <div className="dashboard-content">
+          {/* ROS Connection Status Section */}
+          <div className="ros-status-section">
+            <h2>ROS Connection Status</h2>
+            <div className="status-display">
+              <span className="status-label">Connection:</span>
+              <span className={`status-value ${rosStatus === 'Connected' ? 'connected' : 'disconnected'}`}>
+                {rosStatus}
+              </span>
+            </div>
+          </div>
+
+          {/* ROS2 Topic Subscriber Section */}
+          <div className="topic-subscriber-section">
+            <h2>ROS2 Topic Subscriber</h2>
+            <div className="subscriber-controls">
+              <div className="input-group">
+                <label>Topic Name:</label>
+                <input
+                  type="text"
+                  value={topicName}
+                  onChange={(e) => setTopicName(e.target.value)}
+                  placeholder="/my_topic"
+                  disabled={isSubscribed}
+                />
+              </div>
+              <div className="input-group">
+                <label>Message Type:</label>
+                <input
+                  type="text"
+                  value={messageType}
+                  onChange={(e) => setMessageType(e.target.value)}
+                  placeholder="std_msgs/String"
+                  disabled={isSubscribed}
+                />
+              </div>
+              <div className="button-group">
+                {!isSubscribed ? (
+                  <button onClick={handleSubscribe} className="subscribe-button">
+                    Subscribe
+                  </button>
+                ) : (
+                  <button onClick={handleUnsubscribe} className="unsubscribe-button">
+                    Unsubscribe
+                  </button>
+                )}
+                <button onClick={handleClearMessages} className="clear-button">
+                  Clear Messages
+                </button>
+              </div>
+            </div>
+            <div className="messages-container">
+              <h3>Messages Received: ({topicMessages.length})</h3>
+              <div className="messages-list">
+                {topicMessages.length === 0 ? (
+                  <p className="no-messages">No messages received yet. Subscribe to a topic to see messages.</p>
+                ) : (
+                  <ul>
+                    {topicMessages.map((msg, index) => (
+                      <li key={index}>
+                        <span className="message-time">[{msg.time}]</span>
+                        <pre className="message-data">{msg.data}</pre>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="info-card">
             <div className="card-icon">🤖</div>
             <h3>Robo Pilot Dashboard</h3>
